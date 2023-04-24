@@ -1,8 +1,8 @@
 {
-  "name": "wise-up",
+  "name": "the-bible-tldr",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pentaxis93.github.io/wise-up",
+  "homepage": "https://pentaxis93.github.io/the-bible-tldr",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
