@@ -1,5 +1,8 @@
 import './App.css';
-import bible from './kjv.json';
+// American Standard Version
+import bible from './asv.json';
+// King James Version
+// import bible from './kjv.json';
 import PropTypes from 'prop-types'
 import { string } from 'prop-types';
 import { number } from 'prop-types';
