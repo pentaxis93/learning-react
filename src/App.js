@@ -1,5 +1,5 @@
 import './App.css';
-import genesis from './1-genesis.json';
+import bible from './kjv.json';
 import PropTypes from 'prop-types'
 import { string } from 'prop-types';
 import { number } from 'prop-types';
@@ -40,7 +40,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {genesis.slice(0, 20).map((verse) => (
+          {bible.slice(0, 20).map((verse) => (
             <VerseRow verse={verse} key={verse.book_id + verse.chapter + verse.verse} />
           ))}
         </tbody>
