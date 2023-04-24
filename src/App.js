@@ -1,4 +1,5 @@
 import './App.css';
+import genesis from './1-genesis.json';
 
 function App() {
   return (
@@ -9,17 +10,23 @@ function App() {
         paddingTop: '1rem',
       }}
     >
-      <h1 className='title'>Wise Up</h1>
+      <h1 className='title'>The Bible: TL;DR</h1>
       <table width="100%">
         <thead>
-          <th>Love</th>
-          <th>Sex</th>
+          <tr>
+            <th>Book</th>
+            <th>Verse</th>
+            <th>Text</th>
+          </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Love</td>
-            <td>Sex</td>
-          </tr>
+          {genesis.slice(0, 20).map((verse) => (
+            <tr key={verse.book_id + verse.chapter + verse.verse}>
+              <td>{verse.book_name}</td>
+              <td>{verse.chapter + ":" + verse.verse}</td>
+              <td>{verse.text}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
