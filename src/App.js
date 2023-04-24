@@ -23,12 +23,26 @@ const VerseRow = ({ verse, onSelect }) => (
 
 VerseRow.propTypes = {
   verse: PropTypes.shape({
-    book_name: string,
-    chapter: number,
-    verse: number,
-    text: string
-  }),
-  onSelect: PropTypes.func,
+    book_name: string.isRequired,
+    chapter: number.isRequired,
+    verse: number.isRequired,
+    text: string.isRequired
+  }).isRequired,
+  onSelect: PropTypes.func.isRequired,
+}
+
+const VerseInfo = ({ book_name, chapter, verse, onBack }) => (
+  <div>
+    <h1>{book_name + " " + chapter + ":" + verse}</h1>
+    <button onClick={() => onBack()}>Back</button>
+  </div>
+)
+
+VerseInfo.propTypes = {
+  book_name: string.isRequired,
+  chapter: number.isRequired,
+  verse: number.isRequired,
+  onBack: PropTypes.func.isRequired,
 }
 
 function App() {
@@ -44,10 +58,12 @@ function App() {
           gridColumnGap: '1rem',
         }}
       >
+      {!selectedItem && (
         <div>
           <input
             value={filter}
-            onChange={(e) => setFilter(e.target.value)} />
+            onChange={(e) => setFilter(e.target.value)}
+          />
           <table width="100%">
             <thead>
               <tr>
@@ -71,10 +87,12 @@ function App() {
             </tbody>
           </table>
         </div>
+        )}
         {selectedItem && (
-          <div>
-            <h1>{selectedItem.book_name + " " + selectedItem.chapter + ":" + selectedItem.verse}</h1>
-          </div>
+          <VerseInfo
+            {...selectedItem}
+            onBack={() => setSelectedItem(null)}
+          />
         )}
       </div>
     </div>
