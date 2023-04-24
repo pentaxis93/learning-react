@@ -1,5 +1,25 @@
 import './App.css';
 import genesis from './1-genesis.json';
+import PropTypes from 'prop-types'
+import { string } from 'prop-types';
+import { number } from 'prop-types';
+
+const VerseRow = ({ verse }) => (
+  <tr>
+    <td>{verse.book_name}</td>
+    <td>{verse.chapter + ":" + verse.verse}</td>
+    <td>{verse.text}</td>
+  </tr>
+)
+
+VerseRow.propTypes = {
+  verse: PropTypes.shape({
+    book_name: string,
+    chapter: number,
+    verse: number,
+    text: string
+  }),
+}
 
 function App() {
   return (
@@ -21,11 +41,7 @@ function App() {
         </thead>
         <tbody>
           {genesis.slice(0, 20).map((verse) => (
-            <tr key={verse.book_id + verse.chapter + verse.verse}>
-              <td>{verse.book_name}</td>
-              <td>{verse.chapter + ":" + verse.verse}</td>
-              <td>{verse.text}</td>
-            </tr>
+            <VerseRow verse={verse} key={verse.book_id + verse.chapter + verse.verse} />
           ))}
         </tbody>
       </table>
