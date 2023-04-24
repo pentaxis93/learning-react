@@ -1,8 +1,8 @@
 {
-  "name": "learning-react",
+  "name": "wise-up",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pentaxis93.github.io/learning-react",
+  "homepage": "https://pentaxis93.github.io/wise-up",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
