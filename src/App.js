@@ -8,6 +8,7 @@ import { string } from 'prop-types';
 import { number } from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
 
 // VerseRow is a component that renders a single row of the table
 const VerseRow = ({ verse, onSelect }) => (
@@ -16,9 +17,11 @@ const VerseRow = ({ verse, onSelect }) => (
     <td>{verse.chapter + ":" + verse.verse}</td>
     <td>{verse.text}</td>
     <td>
-      <button
+      <Button
+        color='primary'
         onClick={() => onSelect(verse)}
-      >Select</button>
+        variant='contained'
+      >Select</Button>
     </td>
   </tr>
 )
@@ -106,9 +109,13 @@ const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
           </tr>
         </tbody>
       </table>
-      <p>{text}</p>
-      <p>{asv}</p>
-      <button onClick={() => onBack()}>Back</button>
+      <Button
+        color='primary'
+        onClick={() => onBack()}
+        variant='contained'
+      >
+        Back
+      </Button>
     </div>
   )
 }
