@@ -165,6 +165,7 @@ function App() {
       {!selectedItem && (
         <div>
           <Input
+            placeholder="Search the Bible"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />
