@@ -21,7 +21,7 @@ const VerseRow = ({ verse, onSelect }) => (
         color='primary'
         onClick={() => onSelect(verse)}
         variant='contained'
-      >Select</Button>
+      >Alterverse</Button>
     </TableCell>
   </TableRow>
 )
@@ -124,7 +124,7 @@ const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
         onClick={() => onBack()}
         variant='contained'
       >
-        Back
+        Back to the other verses
       </Button>
     </div>
   )
