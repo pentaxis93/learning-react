@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import { string } from 'prop-types';
 import { number } from 'prop-types';
 import React from 'react';
+import styled from '@emotion/styled';
 
 // VerseRow is a component that renders a single row of the table
 const VerseRow = ({ verse, onSelect }) => (
@@ -120,6 +121,20 @@ VerseInfo.propTypes = {
   onBack: PropTypes.func.isRequired,
 }
 
+const Title = styled.h1`
+  text-align: center;
+`;
+const Container = styled.div`
+  margin: auto;
+  width: 800px;
+  padding-top: 1rem;
+`;
+const Input = styled.input`
+  width: 100%;
+  font-size: x-large;
+  padding: 0.2rem;
+`;
+
 function App() {
   // filter is the value of the input box
   const [filter, setFilter] = React.useState('');
@@ -127,17 +142,11 @@ function App() {
   const [selectedItem, setSelectedItem] = React.useState(null);
 
   return (
-    <div style={{ margin: 'auto', width: 800, paddingTop: '1rem'}}>
-      <h1 className='title'>The Bible: TL;DR</h1>
-      <div
-        style={{
-          display: 'grid',
-          gridColumnGap: '1rem',
-        }}
-      >
+    <Container>
+      <Title>The Bible: TL;DR</Title>
       {!selectedItem && (
         <div>
-          <input
+          <Input
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />
@@ -164,15 +173,14 @@ function App() {
             </tbody>
           </table>
         </div>
-        )}
-        {selectedItem && (
-          <VerseInfo
-            {...selectedItem}
-            onBack={() => setSelectedItem(null)}
-          />
-        )}
-      </div>
-    </div>
+      )}
+      {selectedItem && (
+        <VerseInfo
+          {...selectedItem}
+          onBack={() => setSelectedItem(null)}
+        />
+      )}
+    </Container>
   );
 }
 
