@@ -74,6 +74,13 @@ const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
   return (
     <div>
       <h1>{book_name + " " + chapter + ":" + verse}</h1>
+      <Button
+        color='primary'
+        onClick={() => onBack()}
+        variant='contained'
+      >
+        Back to the other verses
+      </Button>
       <TableContainer
         component ={Paper}
         sx={{
