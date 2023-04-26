@@ -93,28 +93,28 @@ const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
               <TableCell>King James Version</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>{asv}</TableCell>
-              <TableCell>American Standard Version</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>{darby}</TableCell>
-              <TableCell>1890 Darby Bible</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>{emphbbl}</TableCell>
-              <TableCell>The Emphasized Bible</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>{leb}</TableCell>
-              <TableCell>The Lexham English Bible</TableCell>
-            </TableRow>
-            <TableRow>
               <TableCell>{tanakh}</TableCell>
               <TableCell>Tanakh, The Holy Scriptures</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>{ylt}</TableCell>
               <TableCell>Young's Literal Translation</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{emphbbl}</TableCell>
+              <TableCell>The Emphasized Bible</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{darby}</TableCell>
+              <TableCell>1890 Darby Bible</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{leb}</TableCell>
+              <TableCell>The Lexham English Bible</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{asv}</TableCell>
+              <TableCell>American Standard Version</TableCell>
             </TableRow>
           </TableBody>
         </Table>
