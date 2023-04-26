@@ -85,6 +85,7 @@ const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
         component ={Paper}
         sx={{
           marginBottom: '1rem',
+          marginTop: '1rem',
         }}
       >
         <Table aria-label="simple table">
