@@ -46,24 +46,27 @@ const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
   const [tanakh, setTanakh] = React.useState('');
   const [ylt, setYlt] = React.useState('');
 
+  const apiKey = process.env.REACT_APP_BIBLIA_API_KEY;
+  console.log(apiKey);
+
   React.useEffect(() => {
     // Fetch all the translations when the component loads
-    fetch(`https://api.biblia.com/v1/bible/content/ASV.txt.json?passage=${book_name}${chapter}.${verse}&key=f9b9a8427fa37172a565f9f4a56d2a0b`)
+    fetch(`https://api.biblia.com/v1/bible/content/ASV.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setAsv(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/DARBY.txt.json?passage=${book_name}${chapter}.${verse}&key=f9b9a8427fa37172a565f9f4a56d2a0b`)
+    fetch(`https://api.biblia.com/v1/bible/content/DARBY.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setDarby(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/EMPHBBL.txt.json?passage=${book_name}${chapter}.${verse}&key=f9b9a8427fa37172a565f9f4a56d2a0b`)
+    fetch(`https://api.biblia.com/v1/bible/content/EMPHBBL.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setEmphbbl(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/LEB.txt.json?passage=${book_name}${chapter}.${verse}&key=f9b9a8427fa37172a565f9f4a56d2a0b`)
+    fetch(`https://api.biblia.com/v1/bible/content/LEB.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setLeb(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/TANAKH.txt.json?passage=${book_name}${chapter}.${verse}&key=f9b9a8427fa37172a565f9f4a56d2a0b`)
+    fetch(`https://api.biblia.com/v1/bible/content/TANAKH.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setTanakh(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/YLT.txt.json?passage=${book_name}${chapter}.${verse}&key=f9b9a8427fa37172a565f9f4a56d2a0b`)
+    fetch(`https://api.biblia.com/v1/bible/content/YLT.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setYlt(data.text));
   }, []);
