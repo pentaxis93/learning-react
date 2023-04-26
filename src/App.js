@@ -8,22 +8,22 @@ import { string } from 'prop-types';
 import { number } from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 // VerseRow is a component that renders a single row of the table
 const VerseRow = ({ verse, onSelect }) => (
-  <tr>
-    <td>{verse.book_name}</td>
-    <td>{verse.chapter + ":" + verse.verse}</td>
-    <td>{verse.text}</td>
-    <td>
+  <TableRow>
+    <TableCell>{verse.book_name}</TableCell>
+    <TableCell>{verse.chapter + ":" + verse.verse}</TableCell>
+    <TableCell>{verse.text}</TableCell>
+    <TableCell>
       <Button
         color='primary'
         onClick={() => onSelect(verse)}
         variant='contained'
       >Select</Button>
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 )
 
 VerseRow.propTypes = {
@@ -74,44 +74,51 @@ const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
   return (
     <div>
       <h1>{book_name + " " + chapter + ":" + verse}</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Text</th>
-            <th>Translation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{text}</td>
-            <td>King James Version</td>
-          </tr>
-          <tr>
-            <td>{asv}</td>
-            <td>American Standard Version</td>
-          </tr>
-          <tr>
-            <td>{darby}</td>
-            <td>1890 Darby Bible</td>
-          </tr>
-          <tr>
-            <td>{emphbbl}</td>
-            <td>The Emphasized Bible</td>
-          </tr>
-          <tr>
-            <td>{leb}</td>
-            <td>The Lexham English Bible</td>
-          </tr>
-          <tr>
-            <td>{tanakh}</td>
-            <td>Tanakh, The Holy Scriptures</td>
-          </tr>
-          <tr>
-            <td>{ylt}</td>
-            <td>Young's Literal Translation</td>
-          </tr>
-        </tbody>
-      </table>
+      <TableContainer
+        component ={Paper}
+        sx={{
+          marginBottom: '1rem',
+        }}
+      >
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Text</TableCell>
+              <TableCell>Translation</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>{text}</TableCell>
+              <TableCell>King James Version</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{asv}</TableCell>
+              <TableCell>American Standard Version</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{darby}</TableCell>
+              <TableCell>1890 Darby Bible</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{emphbbl}</TableCell>
+              <TableCell>The Emphasized Bible</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{leb}</TableCell>
+              <TableCell>The Lexham English Bible</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{tanakh}</TableCell>
+              <TableCell>Tanakh, The Holy Scriptures</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{ylt}</TableCell>
+              <TableCell>Young's Literal Translation</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
       <Button
         color='primary'
         onClick={() => onBack()}
@@ -143,6 +150,7 @@ const Input = styled.input`
   width: 100%;
   font-size: x-large;
   padding: 0.2rem;
+  margin-bottom: 1rem;
 `;
 
 function App() {
@@ -160,28 +168,30 @@ function App() {
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />
-          <table width="100%">
-            <thead>
-              <tr>
-                <th>Book</th>
-                <th>Verse</th>
-                <th>Text (King James Version)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bible
-                .filter((verse) => verse.text.toLowerCase().includes(filter.toLowerCase()))
-                .slice(0, 20)
-                .map((verse) => (
-                  <VerseRow
-                    key={verse.book_id + verse.chapter + verse.verse}
-                    onSelect={() => setSelectedItem(verse)}
-                    verse={verse}
-                  />
-                ))
-              }
-            </tbody>
-          </table>
+          <TableContainer component ={Paper}>
+            <Table width="100%">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Book</TableCell>
+                  <TableCell>Verse</TableCell>
+                  <TableCell>Text (King James Version)</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {bible
+                  .filter((verse) => verse.text.toLowerCase().includes(filter.toLowerCase()))
+                  .slice(0, 20)
+                  .map((verse) => (
+                    <VerseRow
+                      key={verse.book_id + verse.chapter + verse.verse}
+                      onSelect={() => setSelectedItem(verse)}
+                      verse={verse}
+                    />
+                  ))
+                }
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       )}
       {selectedItem && (
