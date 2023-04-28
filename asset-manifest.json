@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/the-bible-tldr/static/css/main.18e841b2.css",
-    "main.js": "/the-bible-tldr/static/js/main.e1e89b12.js",
+    "main.js": "/the-bible-tldr/static/js/main.be1d154e.js",
     "static/js/787.d27975b8.chunk.js": "/the-bible-tldr/static/js/787.d27975b8.chunk.js",
     "static/media/roboto-all-500-normal.woff": "/the-bible-tldr/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/the-bible-tldr/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
@@ -37,11 +37,11 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/the-bible-tldr/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/the-bible-tldr/index.html",
     "main.18e841b2.css.map": "/the-bible-tldr/static/css/main.18e841b2.css.map",
-    "main.e1e89b12.js.map": "/the-bible-tldr/static/js/main.e1e89b12.js.map",
+    "main.be1d154e.js.map": "/the-bible-tldr/static/js/main.be1d154e.js.map",
     "787.d27975b8.chunk.js.map": "/the-bible-tldr/static/js/787.d27975b8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.18e841b2.css",
-    "static/js/main.e1e89b12.js"
+    "static/js/main.be1d154e.js"
   ]
 }
