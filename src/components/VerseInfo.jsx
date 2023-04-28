@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types'
 import { string } from 'prop-types';
 import { number } from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import VerseContext from '../VerseContext';
 
 // VerseInfo is a component that renders the details of a single verse
-const VerseInfo = ({ book_name, chapter, verse, text, onBack }) => {
+const VerseInfo = ({ onBack }) => {
+  const { selectedItem: { book_name, chapter, verse, text } } = useContext(VerseContext);
+
   // Set up state for all the translations
   const [asv, setAsv] = React.useState('');
   const [darby, setDarby] = React.useState('');
