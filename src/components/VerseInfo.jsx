@@ -7,7 +7,11 @@ import VerseContext from '../VerseContext';
 
 // VerseInfo is a component that renders the details of a single verse
 const VerseInfo = ({ onBack }) => {
-  const { selectedItem: { book_name, chapter, verse, text } } = useContext(VerseContext);
+  const { 
+    state: {
+      selectedItem: { book_name, chapter, verse, text },
+    },
+  } = useContext(VerseContext);
 
   // Set up state for all the translations
   const [asv, setAsv] = React.useState('');
@@ -18,7 +22,6 @@ const VerseInfo = ({ onBack }) => {
   const [ylt, setYlt] = React.useState('');
 
   const apiKey = process.env.REACT_APP_BIBLIA_API_KEY;
-  console.log(apiKey);
 
   React.useEffect(() => {
     fetch(`https://api.biblia.com/v1/bible/content/ASV.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)

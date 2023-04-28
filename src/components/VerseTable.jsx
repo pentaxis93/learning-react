@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import VerseRow from './VerseRow';
 import VerseContext from '../VerseContext';
 
 const VerseTable = () => {
-  const { bible, filter, setSelectedItem } = useContext(VerseContext);
+  const {
+    state: { bible, filter },
+    dispatch,
+  } = React.useContext(VerseContext);
 
   return (
     <TableContainer component ={Paper}>
@@ -23,7 +26,10 @@ const VerseTable = () => {
             .map((verse) => (
               <VerseRow
                 key={verse.book_id + verse.chapter + verse.verse}
-                onSelect={() => setSelectedItem(verse)}
+                onSelect={() => dispatch({
+                  type: 'SET_SELECTED_ITEM',
+                  payload: verse
+                })}
                 verse={verse}
               />
             ))

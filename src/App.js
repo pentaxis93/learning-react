@@ -8,6 +8,28 @@ import VerseFilter from './components/VerseFilter';
 import VerseTable from './components/VerseTable';
 import VerseContext from './VerseContext';
 
+const bibleReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_BIBLE':
+      return {
+        ...state,
+        bible: action.payload,
+      };
+    case 'SET_FILTER':
+      return {
+        ...state,
+        filter: action.payload,
+      };
+    case 'SET_SELECTED_ITEM':
+      return {
+        ...state,
+        selectedItem: action.payload,
+      };
+    default:
+      throw new Error('No action');
+  }
+};
+
 const Title = styled.h1`
   text-align: center;
 `;
@@ -18,38 +40,48 @@ const PageContainer = styled.div`
 `;
 
 function App() {
-  const [filter, setFilter] = React.useState('');
-  const [bible, setBible] = React.useState([]);
-  const [selectedItem, setSelectedItem] = React.useState(null);
+  const [state, dispatch] = React.useReducer(bibleReducer, {
+    filter: '',
+    bible: [],
+    selectedItem: null,
+  });
 
   React.useEffect(() => {
     fetch("/the-bible-tldr/kjv.json")
       .then(res => res.json())
-      .then(data => setBible(data));
+      .then(data =>
+        dispatch({
+          type: 'SET_BIBLE',
+          payload: data
+        })
+      );
   }, []);
+
+  if (!state.bible) {
+    return <div>Loading...</div>;
+  };
 
   return (
     <VerseContext.Provider
       value={{
-        filter,
-        setFilter,
-        bible,
-        setBible,
-        selectedItem,
-        setSelectedItem,
+        state,
+        dispatch,
       }}
     >
       <PageContainer>
         <Title>The Bible: TL;DR</Title>
-        {!selectedItem && (
+        {!state.selectedItem && (
           <div>
             <VerseFilter />
             <VerseTable />
           </div>
         )}
-        {selectedItem && (
+        {state.selectedItem && (
           <VerseInfo
-            onBack={() => setSelectedItem(null)}
+            onBack={() => dispatch({
+              type: 'SET_SELECTED_ITEM',
+              payload: null
+            })}
           />
         )}
       </PageContainer>

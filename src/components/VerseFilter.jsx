@@ -10,13 +10,19 @@ const Input = styled.input`
 `;
 
 const VerseFilter = () => {
-  const { filter, setFilter } = useContext(VerseContext);
+  const {
+    state: { filter },
+    dispatch,
+  } = useContext(VerseContext);
 
   return (
     <Input
       placeholder="Search the Bible"
       value={filter}
-      onChange={(e) => setFilter(e.target.value)}
+      onChange={(e) => dispatch({
+        type: 'SET_FILTER',
+        payload: e.target.value,
+      })}
     />
   );
 };
