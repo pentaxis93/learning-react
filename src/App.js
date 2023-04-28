@@ -19,13 +19,22 @@ const PageContainer = styled.div`
 
 function App() {
   const [filter, setFilter] = React.useState('');
+  const [bible, setBible] = React.useState([]);
   const [selectedItem, setSelectedItem] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch("/the-bible-tldr/kjv.json")
+      .then(res => res.json())
+      .then(data => setBible(data));
+  }, []);
 
   return (
     <VerseContext.Provider
       value={{
         filter,
         setFilter,
+        bible,
+        setBible,
         selectedItem,
         setSelectedItem,
       }}

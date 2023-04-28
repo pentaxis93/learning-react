@@ -1,11 +1,10 @@
-import bible from '../kjv.json';
 import React, { useContext } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import VerseRow from './VerseRow';
 import VerseContext from '../VerseContext';
 
 const VerseTable = () => {
-  const { filter, setSelectedItem } = useContext(VerseContext);
+  const { bible, filter, setSelectedItem } = useContext(VerseContext);
 
   return (
     <TableContainer component ={Paper}>
