@@ -11,7 +11,7 @@ import VerseContext from './VerseContext';
 const Title = styled.h1`
   text-align: center;
 `;
-const Container = styled.div`
+const PageContainer = styled.div`
   margin: auto;
   width: 800px;
   padding-top: 1rem;
@@ -30,7 +30,7 @@ function App() {
         setSelectedItem,
       }}
     >
-      <Container>
+      <PageContainer>
         <Title>The Bible: TL;DR</Title>
         {!selectedItem && (
           <div>
@@ -43,7 +43,7 @@ function App() {
             onBack={() => setSelectedItem(null)}
           />
         )}
-      </Container>
+      </PageContainer>
     </VerseContext.Provider>
   );
 }
