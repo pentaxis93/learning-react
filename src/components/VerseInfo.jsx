@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types'
 import { string } from 'prop-types';
 import { number } from 'prop-types';
-import React, { useContext } from 'react';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+
+import useStore from '../store';
 
 // VerseInfo is a component that renders the details of a single verse
 const VerseInfo = ({ onBack }) => {
-  const selectedItem = useSelector(state => state.selectedItem)
+  const selectedItem = useStore(state => state.selectedItem);
 
   // Set up state for all the translations
   const [asv, setAsv] = React.useState('');
@@ -66,7 +67,7 @@ const VerseInfo = ({ onBack }) => {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>{selectedItem.verse.text}</TableCell>
+              <TableCell>{selectedItem.text}</TableCell>
               <TableCell>King James Version</TableCell>
             </TableRow>
             <TableRow>
