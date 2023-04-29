@@ -1,13 +1,12 @@
 import React from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import VerseRow from './VerseRow';
-import VerseContext from '../VerseContext';
+import { useDispatch, useSelector } from 'react-redux';
 
 const VerseTable = () => {
-  const {
-    state: { bible, filter },
-    dispatch,
-  } = React.useContext(VerseContext);
+  const dispatch = useDispatch();
+  const bible = useSelector(state => state.bible);
+  const filter = useSelector(state => state.filter);
 
   return (
     <TableContainer component ={Paper}>
@@ -26,10 +25,12 @@ const VerseTable = () => {
             .map((verse) => (
               <VerseRow
                 key={verse.book_id + verse.chapter + verse.verse}
-                onSelect={() => dispatch({
-                  type: 'SET_SELECTED_ITEM',
-                  payload: verse
-                })}
+                onSelect={(verse) =>
+                    dispatch({
+                      type: 'SET_SELECTED_ITEM',
+                      payload: verse,
+                    })
+                }
                 verse={verse}
               />
             ))

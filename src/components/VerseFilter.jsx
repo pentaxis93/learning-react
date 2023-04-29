@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import VerseContext from '../VerseContext';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Input = styled.input`
   width: 100%;
@@ -10,10 +10,8 @@ const Input = styled.input`
 `;
 
 const VerseFilter = () => {
-  const {
-    state: { filter },
-    dispatch,
-  } = useContext(VerseContext);
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter)
 
   return (
     <Input

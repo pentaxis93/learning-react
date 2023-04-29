@@ -3,15 +3,11 @@ import { string } from 'prop-types';
 import { number } from 'prop-types';
 import React, { useContext } from 'react';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import VerseContext from '../VerseContext';
+import { useDispatch, useSelector } from 'react-redux';
 
 // VerseInfo is a component that renders the details of a single verse
 const VerseInfo = ({ onBack }) => {
-  const { 
-    state: {
-      selectedItem: { book_name, chapter, verse, text },
-    },
-  } = useContext(VerseContext);
+  const selectedItem = useSelector(state => state.selectedItem)
 
   // Set up state for all the translations
   const [asv, setAsv] = React.useState('');
@@ -24,29 +20,29 @@ const VerseInfo = ({ onBack }) => {
   const apiKey = process.env.REACT_APP_BIBLIA_API_KEY;
 
   React.useEffect(() => {
-    fetch(`https://api.biblia.com/v1/bible/content/ASV.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
+    fetch(`https://api.biblia.com/v1/bible/content/ASV.txt.json?passage=${selectedItem.book_name}${selectedItem.chapter}.${selectedItem.verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setAsv(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/DARBY.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
+    fetch(`https://api.biblia.com/v1/bible/content/DARBY.txt.json?passage=${selectedItem.book_name}${selectedItem.chapter}.${selectedItem.verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setDarby(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/EMPHBBL.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
+    fetch(`https://api.biblia.com/v1/bible/content/EMPHBBL.txt.json?passage=${selectedItem.book_name}${selectedItem.chapter}.${selectedItem.verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setEmphbbl(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/LEB.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
+    fetch(`https://api.biblia.com/v1/bible/content/LEB.txt.json?passage=${selectedItem.book_name}${selectedItem.chapter}.${selectedItem.verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setLeb(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/TANAKH.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
+    fetch(`https://api.biblia.com/v1/bible/content/TANAKH.txt.json?passage=${selectedItem.book_name}${selectedItem.chapter}.${selectedItem.verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setTanakh(data.text));
-    fetch(`https://api.biblia.com/v1/bible/content/YLT.txt.json?passage=${book_name}${chapter}.${verse}&key=${apiKey}`)
+    fetch(`https://api.biblia.com/v1/bible/content/YLT.txt.json?passage=${selectedItem.book_name}${selectedItem.chapter}.${selectedItem.verse}&key=${apiKey}`)
       .then(resp => resp.json())
       .then(data => setYlt(data.text));
   }, []);
 
   return (
     <div>
-      <h1>{book_name + " " + chapter + ":" + verse}</h1>
+      <h1>{selectedItem.book_name + " " + selectedItem.chapter + ":" + selectedItem.verse}</h1>
       <Button
         color='primary'
         onClick={() => onBack()}
@@ -70,7 +66,7 @@ const VerseInfo = ({ onBack }) => {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>{text}</TableCell>
+              <TableCell>{selectedItem.verse.text}</TableCell>
               <TableCell>King James Version</TableCell>
             </TableRow>
             <TableRow>

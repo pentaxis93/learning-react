@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { createStore } from 'redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 
 import './App.css';
 
 import VerseInfo from './components/VerseInfo';
 import VerseFilter from './components/VerseFilter';
 import VerseTable from './components/VerseTable';
-import VerseContext from './VerseContext';
 
-const bibleReducer = (state, action) => {
+const bibleReducer = (state = {
+  bible: [],
+  filter: '',
+  selectedItem: null,
+}, action) => {
   switch (action.type) {
     case 'SET_BIBLE':
       return {
@@ -26,9 +31,11 @@ const bibleReducer = (state, action) => {
         selectedItem: action.payload,
       };
     default:
-      throw new Error('No action');
+      return state;
   }
 };
+
+const store = createStore(bibleReducer);
 
 const Title = styled.h1`
   text-align: center;
@@ -40,11 +47,9 @@ const PageContainer = styled.div`
 `;
 
 function App() {
-  const [state, dispatch] = React.useReducer(bibleReducer, {
-    filter: '',
-    bible: [],
-    selectedItem: null,
-  });
+  const dispatch = useDispatch();
+  const bible = useSelector(state => state.bible)
+  const selectedItem = useSelector(state => state.selectedItem)
 
   React.useEffect(() => {
     fetch("/the-bible-tldr/kjv.json")
@@ -57,36 +62,29 @@ function App() {
       );
   }, []);
 
-  if (!state.bible) {
+  if (!bible) {
     return <div>Loading...</div>;
   };
 
   return (
-    <VerseContext.Provider
-      value={{
-        state,
-        dispatch,
-      }}
-    >
-      <PageContainer>
-        <Title>The Bible: TL;DR</Title>
-        {!state.selectedItem && (
-          <div>
-            <VerseFilter />
-            <VerseTable />
-          </div>
-        )}
-        {state.selectedItem && (
-          <VerseInfo
-            onBack={() => dispatch({
-              type: 'SET_SELECTED_ITEM',
-              payload: null
-            })}
-          />
-        )}
-      </PageContainer>
-    </VerseContext.Provider>
+    <PageContainer>
+      <Title>The Bible: TL;DR</Title>
+      {!selectedItem && (
+        <div>
+          <VerseFilter />
+          <VerseTable />
+        </div>
+      )}
+      {selectedItem && (
+        <VerseInfo
+          onBack={() => dispatch({
+            type: 'SET_SELECTED_ITEM',
+            payload: null
+          })}
+        />
+      )}
+    </PageContainer>
   );
 }
 
-export default App;
+export default () => <Provider store={store}><App /></Provider>;

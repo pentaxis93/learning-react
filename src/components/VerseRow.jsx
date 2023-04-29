@@ -15,7 +15,9 @@ const VerseRow = ({ verse, onSelect }) => (
         color='primary'
         onClick={() => onSelect(verse)}
         variant='contained'
-      >Select</Button>
+      >
+        Select
+      </Button>
     </TableCell>
   </TableRow>
 )
