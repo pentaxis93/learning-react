@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeObservable, observable, computed } from 'mobx';
 
 class Store {
   bible = [];
@@ -6,7 +6,17 @@ class Store {
   selectedItem = null;
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this, {
+      bible: observable,
+      filter: observable,
+      selectedItem: observable,
+      filteredVerses: computed,
+    });
+  }
+
+  get filteredVerses() {
+    return this.bible
+      .filter((verse) => verse.text.toLowerCase().includes(this.filter.toLowerCase()))
   }
 
   setBible(bible) {
@@ -18,6 +28,7 @@ class Store {
   setSelectedItem(selectedItem) {
     this.selectedItem = selectedItem;
   }
+  filteredVerses
 }
 
 const store = new Store();

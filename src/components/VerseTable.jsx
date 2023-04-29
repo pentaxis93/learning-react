@@ -18,8 +18,7 @@ const VerseTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {store.bible
-            .filter((verse) => verse.text.toLowerCase().includes(store.filter.toLowerCase()))
+          {store.filteredVerses
             .slice(0, 20)
             .map((verse) => (
               <VerseRow
