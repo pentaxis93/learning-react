@@ -1,13 +1,12 @@
 import React from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import VerseRow from './VerseRow';
-import useStore from '../store';
+
+import store from '../store';
+
+import { observer } from 'mobx-react';
 
 const VerseTable = () => {
-  const bible = useStore(state => state.bible);
-  const filter = useStore(state => state.filter);
-  const setSelectedItem = useStore(state => state.setSelectedItem);
-
   return (
     <TableContainer component ={Paper}>
       <Table width="100%">
@@ -19,13 +18,13 @@ const VerseTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {bible
-            .filter((verse) => verse.text.toLowerCase().includes(filter.toLowerCase()))
+          {store.bible
+            .filter((verse) => verse.text.toLowerCase().includes(store.filter.toLowerCase()))
             .slice(0, 20)
             .map((verse) => (
               <VerseRow
                 key={verse.book_id + verse.chapter + verse.verse}
-                onSelect={(verse) => setSelectedItem(verse)}
+                onSelect={(verse) => store.setSelectedItem(verse)}
                 verse={verse}
               />
             ))
@@ -36,4 +35,4 @@ const VerseTable = () => {
   );
 };
 
-export default VerseTable;
+export default observer(VerseTable);

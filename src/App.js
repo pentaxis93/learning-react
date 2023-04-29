@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import useStore from './store';
+import store from './store';
+
+import { observer } from 'mobx-react';
 
 import './App.css';
 
@@ -19,25 +21,22 @@ const PageContainer = styled.div`
 `;
 
 function App() {
-  const selectedItem = useStore(state => state.selectedItem)
-  const setSelectedItem = useStore(state => state.setSelectedItem)
-
   return (
     <PageContainer>
       <Title>The Bible: TL;DR</Title>
-      {!selectedItem && (
+      {!store.selectedItem && (
         <div>
           <VerseFilter />
           <VerseTable />
         </div>
       )}
-      {selectedItem && (
+      {store.selectedItem && (
         <VerseInfo
-          onBack={() => setSelectedItem(null)}
+          onBack={() => store.setSelectedItem(null)}
         />
       )}
     </PageContainer>
   );
 }
 
-export default App;
+export default observer(App);

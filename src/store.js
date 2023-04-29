@@ -1,29 +1,29 @@
-import { create } from 'zustand'
+import { makeAutoObservable } from 'mobx';
 
-const useStore = create((set) => ({
-  bible: [],
-  filter: '',
-  selectedItem: null,
-  setBible: (bible) => set(state => ({
-    ...state,
-    bible,
-  })),
-  setFilter: (filter) => set(state => ({
-    ...state,
-    filter,
-  })),
-  setSelectedItem: (selectedItem) => set(state => ({
-    ...state,
-    selectedItem,
-  })),
-}));
+class Store {
+  bible = [];
+  filter = '';
+  selectedItem = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setBible(bible) {
+    this.bible = bible;
+  }
+  setFilter(filter) {
+    this.filter = filter;
+  }
+  setSelectedItem(selectedItem) {
+    this.selectedItem = selectedItem;
+  }
+}
+
+const store = new Store();
 
 fetch("/the-bible-tldr/kjv.json")
   .then(res => res.json())
-  .then(bible => useStore.setState(state => ({
-    ...state,
-    bible,
-  }))
-);
+  .then(bible => store.setBible(bible));
 
-export default useStore;
+export default store;
